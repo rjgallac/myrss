@@ -116,3 +116,12 @@
 .btn-remove:hover {
   color: #d32f2f;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .feed-panel {
+    width: 250px;
+    height: auto;
+    max-height: 100vh;
+  }
+}

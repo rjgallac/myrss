@@ -2,7 +2,9 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* allow internal scrolling when inside a flex container */
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
 }
 
 .controls {
@@ -10,6 +12,7 @@
   gap: 15px;
   margin-bottom: 20px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .controls label {
@@ -17,52 +20,22 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-}
-
-.btn-primary, .btn-save {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-save {
-  background-color: transparent;
-  border: 1px solid #ccc;
-  font-size: 18px;
-  padding: 4px 8px;
-}
-
-.btn-save.saved {
-  color: #ffc107;
+  white-space: nowrap;
 }
 
 .items {
   margin-bottom: 20px;
-  overflow: auto;
-  flex: 1; /* allow items list to grow and be scrollable while keeping pagination visible */
-  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .item {
-  display: flex;
-  gap: 15px;
+  display: block;
   padding: 15px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  margin-bottom: 10px;
   background-color: #f9f9f9;
-  align-items: flex-start;
 }
 
 .item.read {
@@ -70,18 +43,15 @@
   background-color: #f5f5f5;
 }
 
-.item-checkbox {
-  margin-top: 5px;
-  cursor: pointer;
-}
-
 .item-content {
   flex: 1;
+  min-width: 0;
 }
 
 .item-content h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   font-size: 16px;
+  word-break: break-word;
 }
 
 .item-content a {
@@ -93,25 +63,24 @@
   text-decoration: underline;
 }
 
-.item-meta {
-  margin: 5px 0;
-  font-size: 12px;
-  color: #666;
-}
-
 .item-description {
-  margin: 10px 0 0 0;
+  margin: 0;
   font-size: 14px;
   color: #333;
   line-height: 1.4;
+  word-break: break-word;
 }
+
+
 
 .pagination {
   display: flex;
   gap: 10px;
   justify-content: center;
+  align-items: center;
   margin-top: 12px;
   padding-top: 8px;
+  flex-wrap: wrap;
 }
 
 .pagination button {
@@ -126,8 +95,54 @@
   background-color: #f0f0f0;
 }
 
+.btn-mark-all {
+  background-color: #28a745 !important;
+  color: white;
+  border: none !important;
+}
+
+.btn-mark-all:hover {
+  background-color: #218838 !important;
+}
+
 .loading {
   text-align: center;
   padding: 40px;
   color: #666;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .item-list {
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .controls label {
+    justify-content: center;
+  }
+
+  .buttons-group {
+    justify-content: stretch;
+  }
+
+  .btn-primary {
+    flex: 1;
+    min-width: 0;
+  }
+
+
+
+  .item-content h3 {
+    font-size: 15px;
+  }
+
+  .item-description {
+    font-size: 13px;
+  }
 }

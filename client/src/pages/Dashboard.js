@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [selectedFeedId, setSelectedFeedId] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,6 +37,13 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <header className="header">
+        <button
+          className="hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
         <h1>MyRSS Reader</h1>
         {user && (
           <div className="user-info">
@@ -49,10 +57,15 @@ export default function Dashboard() {
       </header>
 
       <div className="main-content">
-        <FeedPanel
-          onSelectFeed={setSelectedFeedId}
-          refreshTrigger={refreshKey}
-        />
+        <div className={`feed-panel-wrapper ${mobileMenuOpen ? 'open' : ''}`}>
+          <FeedPanel
+            onSelectFeed={(feedId) => {
+              setSelectedFeedId(feedId);
+              setMobileMenuOpen(false);
+            }}
+            refreshTrigger={refreshKey}
+          />
+        </div>
         {selectedFeedId && (
           <ItemList feedId={selectedFeedId} refreshKey={refreshKey} />
         )}

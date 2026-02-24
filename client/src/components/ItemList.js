@@ -7,7 +7,6 @@ export default function ItemList({ feedId, refreshKey }) {
   const [loading, setLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [unreadOnly, setUnreadOnly] = useState(false);
-  const [selectedItems, setSelectedItems] = useState(new Set());
 
   useEffect(() => {
     loadItems();
@@ -41,40 +40,14 @@ export default function ItemList({ feedId, refreshKey }) {
     }
   };
 
-  const handleSelectItem = (itemId) => {
-    const newSelected = new Set(selectedItems);
-    if (newSelected.has(itemId)) {
-      newSelected.delete(itemId);
-    } else {
-      newSelected.add(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
 
-  const handleMarkAsRead = async () => {
-    try {
-      await itemAPI.markAsRead(Array.from(selectedItems));
-      setSelectedItems(new Set());
-      loadItems();
-    } catch (error) {
-      console.error('Error marking items as read:', error);
-    }
-  };
 
-  const handleToggleSaved = async (itemId) => {
-    try {
-      await itemAPI.toggleSaved(itemId);
-      loadItems();
-    } catch (error) {
-      console.error('Error toggling saved status:', error);
-    }
-  };
+
 
   const handleMarkAllAsRead = async () => {
     try {
       const allItemIds = items.map(item => item.id);
       await itemAPI.markAsRead(allItemIds);
-      setSelectedItems(new Set());
       loadItems();
     } catch (error) {
       console.error('Error marking items as read:', error);
@@ -97,16 +70,6 @@ export default function ItemList({ feedId, refreshKey }) {
           />
           Unread only
         </label>
-
-        <button onClick={handleMarkAllAsRead} className="btn-primary">
-          Mark all as read
-        </button>
-
-        {selectedItems.size > 0 && (
-          <button onClick={handleMarkAsRead} className="btn-primary">
-            Mark {selectedItems.size} as read
-          </button>
-        )}
       </div>
 
       <div className="items">
@@ -115,29 +78,14 @@ export default function ItemList({ feedId, refreshKey }) {
         ) : (
           items.map((item) => (
             <div key={item.id} className={`item ${item.is_read ? 'read' : 'unread'}`}>
-              <input
-                type="checkbox"
-                checked={selectedItems.has(item.id)}
-                onChange={() => handleSelectItem(item.id)}
-                className="item-checkbox"
-              />
               <div className="item-content">
                 <h3>
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.title}
                   </a>
                 </h3>
-                <p className="item-meta">
-                  {new Date(item.pub_date).toLocaleDateString()}
-                </p>
                 <p className="item-description">{(stripHtml(item.description) || '').substring(0, 200)}...</p>
               </div>
-              <button
-                onClick={() => handleToggleSaved(item.id)}
-                className={`btn-save ${item.is_saved ? 'saved' : ''}`}
-              >
-                {item.is_saved ? '★' : '☆'}
-              </button>
             </div>
           ))
         )}
@@ -146,6 +94,7 @@ export default function ItemList({ feedId, refreshKey }) {
       <div className="pagination">
         <button onClick={() => setSkip(Math.max(0, skip - 10))}>Previous</button>
         <button onClick={() => setSkip(skip + 10)}>Next</button>
+        <button onClick={handleMarkAllAsRead} className="btn-mark-all">Mark all as read</button>
       </div>
     </div>
   );
