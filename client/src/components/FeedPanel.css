@@ -1,0 +1,118 @@
+.feed-panel {
+  width: 300px;
+  border-right: 1px solid #e0e0e0;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+.feed-panel h2 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+}
+
+.add-feed-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.add-feed-form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-feed-form button {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-feed-form button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.add-feed-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.no-feeds {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.feed-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.feed-item:hover {
+  background-color: #f5f5f5;
+}
+
+.feed-item.active {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.feed-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.feed-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feed-url {
+  margin: 0;
+  font-size: 11px;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-remove {
+  background-color: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  margin-left: 8px;
+}
+
+.btn-remove:hover {
+  color: #d32f2f;
+}
