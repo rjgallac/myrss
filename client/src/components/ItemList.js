@@ -6,7 +6,7 @@ export default function ItemList({ feedId, refreshKey }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [skip, setSkip] = useState(0);
-  const [unreadOnly, setUnreadOnly] = useState(false);
+  const [unreadOnly, setUnreadOnly] = useState(true);
 
   useEffect(() => {
     loadItems();
