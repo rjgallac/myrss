@@ -5,6 +5,8 @@
     flex: 1;
     overflow-y: auto;
     width: 100%;
+    /* Ensure there's enough room at the bottom of the scrollable area */
+    padding-bottom: 60px;
 }
 
 .controls {
@@ -77,7 +79,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 12px;
-    padding: 12px 0; /* Added padding to prevent clipping */
+    padding: 12px 0;
     flex-wrap: wrap;
 }
 
@@ -85,7 +87,7 @@
     padding: 8px 12px;
     border: 1px solid #ddd;
     background-color: white;
-    border-radius: 4px;
+    border-radius: 4ps;
     cursor: pointer;
     font-size: 14px;
 }
@@ -114,6 +116,8 @@
 @media (max-width: 768px) {
     .item-list {
         padding: 15px;
+        /* Ensure extra space at the bottom so pagination doesn't get hidden under browser UI or edges */
+        padding-bottom: 80px;
     }
 
     .controls {
