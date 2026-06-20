@@ -82,6 +82,9 @@
     margin-top: 12px;
     padding: 12px 0;
     flex-wrap: wrap;
+    /* Ensure the pagination container itself has a minimum height and visibility */
+    min-height: 50px;
+    width: 100%;
 }
 
 .pagination button {
