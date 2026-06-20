@@ -4,7 +4,7 @@ require("../middleware/passport");
 
 const router = express.Router();
 
-router.post("/api/login", passport.authenticate("local"), (req, res) => {
+router.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
   // Explicitly touch the session to force a 'set-cookie' header
   req.session.lastLogin = new Date();
   req.session.userEmail = req.user.email;
