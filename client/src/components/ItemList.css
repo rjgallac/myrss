@@ -77,7 +77,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 12px;
-    padding-top: 8px;
+    padding: 12px 0; /* Added padding to prevent clipping */
     flex-wrap: wrap;
 }
 
