@@ -4,7 +4,7 @@ require("../middleware/passport");
 
 const router = express.Router();
 
-router.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
+router.post("/login", passport.authenticate("local"), (req, res) => {
   // Explicitly touch the session to force a 'set-cookie' header
   req.session.lastLogin = new Date();
   req.session.userEmail = req.user.email;
@@ -12,7 +12,7 @@ router.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
   res.json({ message: "Logged in successfully", user: req.user });
 });
 
-router.get("/api/me", (req, res) => {
+router.get("/me", (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
@@ -20,7 +20,7 @@ router.get("/api/me", (req, res) => {
   }
 });
 
-router.post("/api/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   req.logout((err) => {
     if (err) return res.status(500).json({ error: err });
     res.json({ message: "Logged out successfully" });
