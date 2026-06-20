@@ -1,9 +1,9 @@
-const { Pool } = require('pg');
-const fs = require('fs');
-const path = require('path');
+const { Pool } = require("pg");
+const fs = require("fs");
+const path = require("path");
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
 });
 
 async function initializeDB() {
@@ -12,7 +12,6 @@ async function initializeDB() {
     const schema = `
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        google_id VARCHAR(255) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         name VARCHAR(255),
         picture VARCHAR(500),
@@ -57,14 +56,14 @@ async function initializeDB() {
     `;
 
     await pool.query(schema);
-    console.log('Database initialized successfully');
+    console.log("Database initialized successfully");
   } catch (error) {
-    console.error('Database initialization error:', error);
+    console.error("Database initialization error:", error);
     throw error;
   }
 }
 
 module.exports = {
   pool,
-  initializeDB
+  initializeDB,
 };
